@@ -3,130 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>范祐銘 James | 個人名片</title>
+    <title>范祐銘 James | 城乙物流</title>
     <style>
         :root {
-            --wood-warmth: #e0d5c1; 
-            --nordic-blue: #4a5d6a; 
-            --text-dark: #333333;
-            --accent-color: #8e735b; 
+            --tech-blue: #2c3e50; 
+            --wood-warm: #d7ccc8;
+            --accent-gold: #a1887f;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
         }
 
         body {
             margin: 0;
             padding: 20px 0;
+            background: #e9ecef;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            color: #333;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 450px;
+            margin: auto;
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .header {
+            background: linear-gradient(rgba(44, 62, 80, 0.85), rgba(44, 62, 80, 0.85)), url('profile.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 180px;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f5f1ed 0%, #e0d5c1 100%);
-            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            color: white;
         }
 
-        .card {
-            background: rgba(255, 255, 255, 0.9);
-            width: 90%;
-            max-width: 380px;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            text-align: center;
-            border: 1px solid rgba(255,255,255,0.3);
-            backdrop-filter: blur(5px);
-        }
+        .header h1 { margin: 0; font-size: 26px; letter-spacing: 2px; }
+        .header p { margin: 8px 0 0; font-size: 15px; opacity: 0.9; font-weight: 300; }
 
-        /* 新增的大頭貼樣式 */
-        .avatar-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 3px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+        .content { padding: 30px 20px; }
 
-        .avatar-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* 確保照片裁切成圓形後不變形 */
-        }
-
-        .profile-info h1 {
-            font-size: 26px;
-            color: var(--text-dark);
-            margin: 10px 0 5px;
-            letter-spacing: 2px;
-        }
-
-        .profile-info h2 {
-            font-size: 16px;
-            color: var(--nordic-blue);
-            font-weight: 400;
+        .company-status {
+            background: #fff3e0;
+            color: #e65100;
+            padding: 6px 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            display: inline-block;
             margin-bottom: 20px;
         }
 
-        .location-tag {
-            display: inline-block;
-            background: #ece5d8;
-            color: var(--accent-color);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-bottom: 15px;
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--tech-blue);
+            margin: 25px 0 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--wood-warm);
         }
 
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .link-btn {
-            text-decoration: none;
-            padding: 14px;
+        /* 聯絡資訊樣式 */
+        .contact-list {
+            background: var(--light-gray);
+            padding: 15px;
             border-radius: 12px;
-            font-size: 15px;
-            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 500;
+            margin-bottom: 12px;
+            text-decoration: none;
+            color: #444;
         }
 
-        .email-btn { background-color: var(--nordic-blue); color: white; }
-        .ig-btn { background-color: transparent; color: var(--text-dark); border: 1px solid #ddd; }
-        .project-btn { background-color: var(--accent-color); color: white; }
+        .contact-item:last-child { margin-bottom: 0; }
 
-        .link-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        .contact-icon { width: 30px; font-size: 18px; }
+        .contact-text { font-size: 14px; flex: 1; }
+
+        /* 服務項目 */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
-        footer { margin-top: 30px; font-size: 12px; color: #999; }
+        .service-card {
+            background: white;
+            border: 1px solid #eee;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .service-card h4 { margin: 0 0 5px; font-size: 14px; color: var(--tech-blue); }
+        .service-card p { margin: 0; font-size: 12px; color: #777; line-height: 1.4; }
+
+        .btn-call {
+            display: block;
+            background: var(--tech-blue);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: 0.3s;
+        }
+
+        footer { text-align: center; padding: 25px; font-size: 12px; color: #999; background: #fafafa; }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <div class="avatar-container">
-            <img src="profile.jpg" alt="James Fan">
-        </div>
-
-        <div class="profile-info">
-            <div class="location-tag">桃園楊梅</div>
+    <div class="container">
+        <div class="header">
             <h1>范祐銘 James</h1>
-            <h2>城乙 ＆ 華通專案</h2>
+            <p>城乙物流 | 負責人</p>
         </div>
 
-        <div class="links-container">
-            <a href="mailto:James.fan@cyl.com.tw" class="link-btn email-btn">✉️ Email 聯絡我</a>
-            <a href="https://www.instagram.com/fan.yu.ming" target="_blank" class="link-btn ig-btn">📸 Instagram: fan.yu.ming</a>
-            <a href="#" class="link-btn project-btn">📂 專案作品集</a>
+        <div class="content">
+            <div class="company-status">主要服務客戶：華通電腦</div>
+
+            <div class="section-title">聯絡資訊</div>
+            <div class="contact-list">
+                <a href="https://www.google.com/maps/search/?api=1&query=桃園市楊梅區新江路155巷168號" target="_blank" class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span class="contact-text">桃園市楊梅區新江路155巷168號</span>
+                </a>
+                <a href="tel:034751338" class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span class="contact-text">公司：03-4751338</span>
+                </a>
+                <a href="tel:0965061168" class="contact-item">
+                    <span class="contact-icon">📱</span>
+                    <span class="contact-text">手機：0965-061-168</span>
+                </a>
+            </div>
+
+            <div class="section-title">核心業務</div>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h4>現場流程管理</h4>
+                    <p>專業倉儲動線與進出貨控管。</p>
+                </div>
+                <div class="service-card">
+                    <h4>整合加工</h4>
+                    <p>結合物流加工，提升生產效率。</p>
+                </div>
+                <div class="service-card" style="grid-column: span 2;">
+                    <h4>設備處理與維運</h4>
+                    <p>專業設備管理與技術支援服務。</p>
+                </div>
+            </div>
+
+            <a href="tel:0965061168" class="btn-call">立即撥號聯絡 James</a>
         </div>
 
-        <footer>© 2025 James Fan</footer>
+        <footer>
+            © 2025 城乙物流 | CYL Logistics<br>
+            專業整合倉儲、加工與設備處置
+        </footer>
     </div>
 
 </body>
