@@ -5,72 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>范祐銘 James | 城乙物流 | 倉儲物流專家</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root {
-            --primary-blue: #1a3a5f; /* 科技深藍 */
-            --warm-wood: #b89a7a;    /* 質感木色 */
+            --primary-blue: #1a3a5f; 
+            --warm-wood: #b89a7a;    
+            --accent-blue: #0070f3; /* Vercel 招牌藍，增加科技感 */
             --light-bg: #f8f9fa;
             --white: #ffffff;
         }
 
         * { box-sizing: border-box; scroll-behavior: smooth; }
-        body { margin: 0; font-family: 'Noto Sans TC', sans-serif; background: var(--light-bg); color: #333; line-height: 1.6; }
+        body { margin: 0; font-family: 'Noto Sans TC', sans-serif; background: var(--light-bg); color: #333; line-height: 1.6; overflow-x: hidden; }
 
-        /* 導覽列 */
+        /* 導覽列優化：毛玻璃效果 */
         nav {
-            position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.95);
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px); /* Vercel 渲染出的毛玻璃質感 */
             padding: 15px 0; box-shadow: 0 2px 10px rgba(0,0,0,0.05); z-index: 1000;
-            display: flex; justify-content: center; gap: 20px;
+            display: flex; justify-content: center; gap: 25px;
         }
-        nav a { text-decoration: none; color: var(--primary-blue); font-weight: bold; font-size: 14px; }
+        nav a { text-decoration: none; color: var(--primary-blue); font-weight: bold; font-size: 14px; transition: 0.3s; }
+        nav a:hover { color: var(--warm-wood); }
 
-        /* 英雄區塊 (Hero) */
+        /* 英雄區塊 (Hero)：增加動態漸變 */
         .hero {
-            padding: 100px 20px 60px; text-align: center;
-            background: linear-gradient(135deg, var(--primary-blue), #2c5282); color: white;
+            padding: 120px 20px 80px; text-align: center;
+            background: linear-gradient(-45deg, #1a3a5f, #2c5282, #1e4e8c, #1a3a5f);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite; /* 背景流動動畫 */
+            color: white;
         }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .profile-img {
-            width: 150px; height: 150px; border-radius: 50%; border: 4px solid white;
-            object-fit: cover; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            width: 160px; height: 160px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.3);
+            object-fit: cover; margin-bottom: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .hero h1 { margin: 0; font-size: 32px; letter-spacing: 2px; }
-        .hero .education { font-weight: 300; font-size: 16px; margin-top: 5px; color: #cbd5e0; }
+        .profile-img:hover { transform: scale(1.1) rotate(5deg); border-color: var(--warm-wood); }
 
-        /* 共用容器 */
-        .container { max-width: 800px; margin: auto; padding: 40px 20px; }
+        .hero h1 { margin: 0; font-size: 36px; letter-spacing: 3px; font-weight: 700; }
+        .hero .education { font-weight: 300; font-size: 16px; margin-top: 8px; color: #cbd5e0; letter-spacing: 1px; }
+
+        .container { max-width: 850px; margin: auto; padding: 40px 20px; }
         .section-title { 
-            font-size: 22px; color: var(--primary-blue); border-left: 5px solid var(--warm-wood);
-            padding-left: 15px; margin-bottom: 30px; 
+            font-size: 24px; color: var(--primary-blue); border-left: 6px solid var(--warm-wood);
+            padding-left: 15px; margin: 40px 0 30px; 
         }
 
-        /* 倉儲規格卡片 */
-        .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; }
+        /* 規格卡片：懸浮升起動畫 */
+        .spec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 40px; }
         .spec-card {
-            background: white; padding: 20px; border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-top: 3px solid var(--warm-wood);
+            background: white; padding: 25px; border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03); 
+            border-bottom: 4px solid transparent;
+            transition: all 0.3s ease;
         }
-        .spec-card h3 { margin: 0; font-size: 16px; color: var(--primary-blue); }
-        .spec-card p { margin: 5px 0 0; font-size: 14px; color: #666; }
+        .spec-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--warm-wood);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .spec-card h3 { margin: 0; font-size: 18px; color: var(--primary-blue); }
+        .spec-card p { margin: 10px 0 0; font-size: 14px; color: #666; }
 
-        /* 重點服務區 */
+        /* 服務亮點：微光掠過效果 */
         .service-highlight {
-            background: var(--primary-blue); color: white; padding: 30px; border-radius: 15px; margin-bottom: 40px;
+            position: relative; overflow: hidden;
+            background: var(--primary-blue); color: white; padding: 35px; border-radius: 20px; margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(26, 58, 95, 0.2);
         }
-        .service-highlight h2 { color: var(--warm-wood); margin-top: 0; }
+        .service-highlight::after {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            transform: rotate(45deg); animation: shine 6s infinite;
+        }
+        @keyframes shine { 0% { left: -100%; } 100% { left: 100%; } }
 
-        /* 聯絡資訊 */
+        /* 聯絡資訊卡片 */
         .contact-box {
-            background: white; padding: 25px; border-radius: 15px; text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: var(--white); padding: 40px; border-radius: 24px; text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); border: 1px solid #eee;
         }
         .btn-call {
             display: inline-block; background: var(--warm-wood); color: white;
-            padding: 15px 30px; border-radius: 50px; text-decoration: none;
-            font-weight: bold; margin-top: 20px; transition: 0.3s;
+            padding: 18px 40px; border-radius: 50px; text-decoration: none;
+            font-weight: bold; margin-top: 25px; transition: 0.4s;
+            box-shadow: 0 8px 15px rgba(184, 154, 122, 0.3);
         }
-        .btn-call:hover { transform: scale(1.05); }
+        .btn-call:hover { 
+            background: var(--primary-blue); transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(26, 58, 95, 0.3);
+        }
 
-        footer { text-align: center; padding: 40px; font-size: 12px; color: #999; }
+        footer { text-align: center; padding: 60px 40px; font-size: 13px; color: #aaa; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -78,62 +113,62 @@
 <nav>
     <a href="#about">個人資歷</a>
     <a href="#warehouse">倉儲業務</a>
-    <a href="#contact">聯絡 James</a>
+    <a href="#contact">聯絡方式</a>
 </nav>
 
 <section class="hero">
-    <img src="profile.jpg" alt="范祐銘 James" class="profile-img">
-    <h1>范祐銘 James</h1>
-    <div class="education">逢甲大學 運輸與物流學系</div>
-    <p>城乙物流 | 專案管理與倉儲解決方案專家</p>
+    <img src="profile.jpg" alt="范祐銘 James" class="profile-img" data-aos="zoom-in">
+    <h1 data-aos="fade-up">范祐銘 James</h1>
+    <div class="education" data-aos="fade-up" data-aos-delay="100">逢甲大學 運輸與物流學系</div>
+    <p data-aos="fade-up" data-aos-delay="200">城乙物流 | 專案管理與倉儲解決方案專家</p>
 </section>
 
 <div class="container">
     
-    <section id="about">
+    <section id="about" data-aos="fade-up">
         <h2 class="section-title">專業背景</h2>
         <p>憑藉逢甲物流學系之紮實理論基礎，結合多年現場流程管理經驗。擅長針對電子大廠（如華通電腦）需求，串接倉儲、加工與技術支援服務，確保物流鏈精準、高效運作。</p>
     </section>
 
     <section id="warehouse">
-        <h2 class="section-title">城乙物流 | 業務服務亮點</h2>
+        <h2 class="section-title" data-aos="fade-right">城乙物流 | 業務服務亮點</h2>
         
         <div class="spec-grid">
-            <div class="spec-card">
+            <div class="spec-card" data-aos="flip-left" data-aos-delay="100">
                 <h3>萬坪倉儲空間</h3>
                 <p>大型規模，滿足企業多元存貨需求。</p>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-aos="flip-left" data-aos-delay="200">
                 <h3>保稅倉庫</h3>
-                <p>具備保稅資格，優化客戶稅務與貿易流程。</p>
+                <p>優化客戶稅務與貿易流程，進出口貿易首選。</p>
             </div>
-            <div class="spec-card">
+            <div class="spec-card" data-aos="flip-left" data-aos-delay="300">
                 <h3>立體化倉儲</h3>
-                <p>挑高貨架與揚高堆高機，極大化坪效。</p>
+                <p>挑高貨架與專業揚高堆高機，極大化空間效率。</p>
             </div>
-            <div class="spec-card">
-                <h3>卸貨碼頭</h3>
-                <p>專業設施保障高效率、大批量進出貨。</p>
+            <div class="spec-card" data-aos="flip-left" data-aos-delay="400">
+                <h3>專業卸貨碼頭</h3>
+                <p>高效、大批量進出貨設施，縮短車輛周轉時間。</p>
             </div>
         </div>
 
-        <div class="service-highlight">
+        <div class="service-highlight" data-aos="zoom-in-up">
             <h2>倉儲管理系統 (WMS)</h2>
-            <p>與<strong>進穎資訊</strong>合力開發之專屬倉儲管理系統，實現現場流程數位化，提供高精確度之庫存控管與即時數據反饋。</p>
+            <p>與<strong>進穎資訊</strong>合力開發，實現現場流程數位化，提供高精確度之庫存控管與即時數據反饋。</p>
         </div>
 
-        <div class="service-highlight" style="background: #e2e8f0; color: #2d3748;">
+        <div class="service-highlight" style="background: #e2e8f0; color: #2d3748;" data-aos="zoom-in-up">
             <h2 style="color: var(--primary-blue);">一條龍服務解決方案</h2>
-            <p><strong>倉儲 ➔ 加工 ➔ 物流 ➔ 設備處置</strong><br>為客戶提供一站式後勤整合，有效降低溝通成本與運輸損耗。</p>
+            <p><strong>倉儲 ➔ 加工 ➔ 物流 ➔ 設備處置</strong><br>為客戶提供一站式後勤整合，大幅降低溝通成本與運輸損耗。</p>
         </div>
     </section>
 
-    <section id="contact">
+    <section id="contact" data-aos="fade-up">
         <h2 class="section-title">聯繫 James</h2>
         <div class="contact-box">
             <p>📍 桃園市楊梅區新江路155巷168號</p>
-            <p>📞 公司：03-4751338</p>
-            <p>📱 手機：0965-061-168</p>
+            <p>📞 辦公室：03-4751338</p>
+            <p>📱 直通專線：0965-061-168</p>
             <p>✉️ James.fan@cyl.com.tw</p>
             <a href="tel:0965061168" class="btn-call">立即致電洽談業務</a>
         </div>
@@ -142,8 +177,18 @@
 </div>
 
 <footer>
-    © 2025 James Fan | 逢甲大學運輸與物流學系 | 城乙物流
+    © 2026 James Fan | 城乙物流 | 倉儲物流專家<br>
+    Powered by Vercel & Next-gen Infrastructure
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800, // 動畫時長
+        once: true,    // 滾動時只觸發一次
+        offset: 100    // 提前觸發動畫的距離
+    });
+</script>
 
 </body>
 </html>
